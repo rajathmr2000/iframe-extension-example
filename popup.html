@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Iframe Inspector</title>
+  <style>
+    body {
+      width: 350px;
+      padding: 16px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f5f5f5;
+    }
+    .header {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+    .controls {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #45a049;
+    }
+    .btn-refresh {
+      background: #2196F3;
+    }
+    .btn-refresh:hover {
+      background: #1976D2;
+    }
+    .btn-highlight {
+      background: #9C27B0;
+    }
+    .btn-highlight:hover {
+      background: #7B1FA2;
+    }
+    .btn-clear {
+      background: #FF5722;
+    }
+    .btn-clear:hover {
+      background: #D84315;
+    }
+    .btn-main {
+      background: #607D8B;
+    }
+    .btn-main:hover {
+      background: #455A64;
+    }
+    .iframe-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .iframe-item {
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      padding: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .iframe-info {
+      margin-bottom: 8px;
+    }
+    .iframe-url {
+      font-size: 12px;
+      color: #666;
+      word-break: break-all;
+      margin-bottom: 4px;
+    }
+    .iframe-id {
+      font-weight: bold;
+      color: #333;
+      font-size: 14px;
+    }
+    .inject-btn {
+      background: #FF9800;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      width: 48%;
+      margin-right: 2%;
+      transition: background 0.3s;
+    }
+    .highlight-btn {
+      background: #9C27B0;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 12px;
+      width: 48%;
+      transition: background 0.3s;
+    }
+    .highlight-btn:hover {
+      background: #7B1FA2;
+    }
+    .button-container {
+      display: flex;
+      gap: 4%;
+    }
+    .inject-btn:hover {
+      background: #F57C00;
+    }
+    .inject-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+    .no-iframes {
+      text-align: center;
+      color: #666;
+      font-style: italic;
+      padding: 20px;
+    }
+    .status {
+      background: #e8f5e8;
+      border: 1px solid #4CAF50;
+      color: #2e7d32;
+      padding: 8px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+      font-size: 12px;
+      display: none;
+    }
+    .loading {
+      text-align: center;
+      color: #666;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h2>🖼️ Iframe Inspector</h2>
+  </div>
+  
+  <div class="status" id="status"></div>
+  
+  <div class="controls">
+    <button class="btn btn-refresh" id="refresh">🔄 Refresh</button>
+    <button class="btn btn-main" id="injectMain">📋 Inject Main Window</button>
+    <button class="btn" id="injectAll">📌 Inject All Frames</button>
+    <button class="btn btn-highlight" id="highlightIframes">🔍 Highlight Iframes</button>
+    <button class="btn btn-clear" id="clearHighlight">🧹 Clear Highlights</button>
+  </div>
+  
+  <div id="loading" class="loading">
+    🔍 Scanning for iframes...
+  </div>
+  
+  <div id="iframeList" class="iframe-list" style="display: none;">
+    <!-- Iframe list will be populated here -->
+  </div>
+  
+  <div id="noIframes" class="no-iframes" style="display: none;">
+    No iframes found on this page
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

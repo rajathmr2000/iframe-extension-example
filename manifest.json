@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Iframe Inspector & Script Injector",
+  "version": "1.0",
+  "description": "Detect iframes on web pages and inject scripts into selected frames",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Iframe Inspector"
+  },
+  "permissions": [
+    "tabs",
+    "scripting",
+    "webNavigation",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["highlight-iframes.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["inject.js", "highlight-iframes.js"],
+      "matches": ["<all_urls>"]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
